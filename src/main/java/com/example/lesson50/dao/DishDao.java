@@ -14,6 +14,16 @@ public class DishDao {
 
     private final JdbcTemplate jdbcTemplate;
 
+    public void deleteAll() {
+        String query = "delete from dishes";
+        jdbcTemplate.update(query);
+    }
+    public void save (String name, String type, Long place_id, Integer price) {
+        String sql = "insert into dishes (name, type, place_id, price) " +
+                "values (?, ?, ?, ?);";
+        jdbcTemplate.update(sql, name, type, place_id, price);
+    }
+
     public Optional<Dish> getAllDishes(Long place_id){
         String sql = "select * from dishes " +
                 "where place_id = ?;";

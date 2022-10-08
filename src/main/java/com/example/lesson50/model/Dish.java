@@ -14,5 +14,5 @@ public class Dish {
     private String name;
     private String type;
     private Long place_id;
-    private Long price;
+    private Integer price;
 }

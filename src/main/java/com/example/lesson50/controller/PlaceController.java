@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
@@ -17,5 +19,10 @@ public class PlaceController {
     @GetMapping("/getAllPlaces")
     private ResponseEntity<Optional<Place>> getAllPlaces(){
         return new ResponseEntity<>(placeDao.getAllPlaces(), HttpStatus.OK);
+    }
+    @PostMapping("/createPlace")
+    public void createUser(@RequestParam String name,
+                           @RequestParam String description){
+        placeDao.save(name, description);
     }
 }
