@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -24,8 +25,8 @@ public class PlaceDao {
         jdbcTemplate.update(sql, name, description);
     }
 
-    public Optional<Place> getAllPlaces(){
+    public List<Place> getAllPlaces(){
         String sql = "select * from places";
-        return Optional.ofNullable(jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Place.class)));
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Place.class));
     }
 }

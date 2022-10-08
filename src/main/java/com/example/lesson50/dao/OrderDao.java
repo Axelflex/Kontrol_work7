@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -30,5 +31,10 @@ public class OrderDao {
                 "values(?, ?, LocalDateTime.now());";
         jdbcTemplate.update(sql, new BeanPropertyRowMapper<>(Order.class), user_id, dish_id);
         return "Order has been placed";
+    }
+    public List<Order> getAllOrders(Long user_id){
+        String sql = "select * from orders " +
+                "where user_id = ?;";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Order.class), user_id);
     }
 }

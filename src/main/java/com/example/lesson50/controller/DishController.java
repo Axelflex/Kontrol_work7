@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController("/dishes")
@@ -18,10 +19,10 @@ public class DishController {
     private final DishDao dishDao;
 
     @GetMapping("/getAllDishes")
-    public ResponseEntity<Optional<Dish>> getAllDishes(@RequestParam Long place_id){
+    public ResponseEntity<List<Dish>> getAllDishes(@RequestParam Long place_id){
         return new ResponseEntity<>(dishDao.getAllDishes(place_id), HttpStatus.OK);
     }
-    @PostMapping("/creaDish")
+    @PostMapping("/createDish")
     public void createUser(@RequestParam String name,
                            @RequestParam String type,
                            @RequestParam Long place_id,

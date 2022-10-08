@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -24,9 +25,9 @@ public class DishDao {
         jdbcTemplate.update(sql, name, type, place_id, price);
     }
 
-    public Optional<Dish> getAllDishes(Long place_id){
+    public List<Dish> getAllDishes(Long place_id){
         String sql = "select * from dishes " +
                 "where place_id = ?;";
-        return Optional.ofNullable(jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Dish.class), place_id));
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Dish.class), place_id);
     }
 }

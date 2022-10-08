@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController("/places")
@@ -17,7 +18,7 @@ import java.util.Optional;
 public class PlaceController {
     private final PlaceDao placeDao;
     @GetMapping("/getAllPlaces")
-    private ResponseEntity<Optional<Place>> getAllPlaces(){
+    private ResponseEntity<List<Place>> getAllPlaces(){
         return new ResponseEntity<>(placeDao.getAllPlaces(), HttpStatus.OK);
     }
     @PostMapping("/createPlace")
